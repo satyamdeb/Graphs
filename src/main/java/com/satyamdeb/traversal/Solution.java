@@ -29,7 +29,7 @@ public class Solution {
         }
         System.out.println("adj = " + adj);
 
-        boolean vis[] = new boolean[V];
+        boolean[] vis = new boolean[V];
         vis[0] = true;
         Queue<Integer> q = new LinkedList<>();
         q.add(0);
