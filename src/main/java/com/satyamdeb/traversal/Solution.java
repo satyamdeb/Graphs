@@ -13,6 +13,39 @@ public class Solution {
         );
 
         System.out.println(bfsOfGraph(V, edges));
+        System.out.println(dfsOfGraph(V, edges));
+    }
+
+    public static List<Integer> dfsOfGraph(int V, List<List<Integer>> edges) {
+        List<Integer> ans = new ArrayList<>();
+
+        // Convert edges to Adjacency List
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i = 0; i < V; i ++) {
+            adj.add(new ArrayList<>());
+        }
+        for(List<Integer> edge: edges) {
+            adj.get(edge.get(0)).add(edge.get(1));
+            adj.get(edge.get(1)).add(edge.get(0));
+        }
+
+        boolean[] vis = new boolean[V];
+
+        dfs(0, adj, vis, ans);
+
+        return ans;
+    }
+
+    private static void dfs(int node, List<List<Integer>> adj, boolean[] vis, List<Integer> ans) {
+        vis[node ] = true;
+        ans.add(node);
+
+        for(int adjacentElement: adj.get(node)) {
+            if(!vis[adjacentElement]) {
+                dfs(adjacentElement, adj, vis, ans);
+            }
+        }
+
     }
 
     public static List<Integer> bfsOfGraph(int V, List<List<Integer>> edges) {
@@ -27,7 +60,6 @@ public class Solution {
             adj.get(edge.get(0)).add(edge.get(1));
             adj.get(edge.get(1)).add(edge.get(0));
         }
-        System.out.println("adj = " + adj);
 
         boolean[] vis = new boolean[V];
         vis[0] = true;
